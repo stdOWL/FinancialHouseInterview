@@ -24,9 +24,17 @@ public class RPDPaymentAPIServiceImpl implements RPDPaymentAPIService {
     @Value("${rpdpayment.clientPath:/client}")
     private String clientPath;
 
+    @Value("${rpdpayment.transactionsPath.report:/transactions/report}")
+    private String transactionsReportPath;
 
+    @Value("${rpdpayment.transactionsPath.report:/transaction/list}")
+    private String transactionsListPath;
+
+    @Value("${rpdpayment.transactionsPath.report:/transaction}")
+    private String transactionsInfoPath;
 
     private final RestClient restClient;
+
 
 
     public LoginResponse merchantLogin(String email, String password) throws AuthenticationFailedException {
@@ -44,36 +52,34 @@ public class RPDPaymentAPIServiceImpl implements RPDPaymentAPIService {
         return response;
     }
 
-    public CustomerInfo clientInfo(String transactionId) throws CustomerInfoNotFoundException {
-        ClientRequest clientRequest = ClientRequest.builder().transactionId(transactionId).build();
+    public GetClientInfoResponseDTO clientInfo(GetClientInfoRequestDTO request, String authenticationToken) throws CustomerInfoNotFoundException {
 
-        ClientResponse clientResponse = restClient.post(clientPath, clientRequest, ClientResponse.class);
+        GetClientInfoResponseDTO clientResponse = restClient.postWithAuthToken(authenticationToken, clientPath, request, GetClientInfoResponseDTO.class);
 
         if(clientResponse.getCustomerInfo() == null )
             throw new CustomerInfoNotFoundException();
 
-        return clientResponse.getCustomerInfo();
+        return clientResponse;
     }
 
     @Override
-    public List<TransactionsReportDTO> reportTransactions(ReportTransactionsRequestDTO requestDTO) {
-        TransactionsReportResponse transactionsReportResponse = restClient.post(clientPath, requestDTO, TransactionsReportResponse.class);
-
+    public List<TransactionsReportDTO> reportTransactions(ReportTransactionsRequestDTO requestDTO, String authenticationToken) {
+        TransactionsReportResponse transactionsReportResponse = restClient.postWithAuthToken(authenticationToken, transactionsReportPath, requestDTO, TransactionsReportResponse.class);
         return transactionsReportResponse.getResponse();
     }
 
     @Override
-    public ListTransactionsResponseDTO listTransactions(ListTransactionsRequestDTO requestDTO) {
-        ListTransactionsResponseDTO transactionsReportResponse = restClient.post(clientPath, requestDTO, ListTransactionsResponseDTO.class);
+    public ListTransactionsResponseDTO listTransactions(ListTransactionsRequestDTO requestDTO, String authenticationToken) {
+        ListTransactionsResponseDTO transactionsReportResponse = restClient.postWithAuthToken(authenticationToken, transactionsListPath, requestDTO, ListTransactionsResponseDTO.class);
 
         return transactionsReportResponse;
     }
 
     @SneakyThrows
     @Override
-    public GetTransactionResponseDTO transactionInfo(GetTransactionRequestDTO requestDTO) {
+    public GetTransactionResponseDTO transactionInfo(GetTransactionRequestDTO requestDTO, String authenticationToken) {
 
-        GetTransactionResponseDTO transactionInfoResponse = restClient.post(clientPath, requestDTO, GetTransactionResponseDTO.class);
+        GetTransactionResponseDTO transactionInfoResponse = restClient.postWithAuthToken(authenticationToken, transactionsInfoPath, requestDTO, GetTransactionResponseDTO.class);
 
 
         if( transactionInfoResponse.getStatus().equalsIgnoreCase("DECLINED") )

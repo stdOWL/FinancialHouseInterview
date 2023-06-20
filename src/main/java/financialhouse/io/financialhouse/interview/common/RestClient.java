@@ -53,6 +53,10 @@ public class RestClient {
         return restTemplate.postForObject(url, entity, responseType);
     }
 
+    public <T> T postWithAuthToken(String authenticationToken, String url, Object request, Class<T> responseType){
+        this.authenticationToken = authenticationToken;
+        return this.post(url, request, responseType);
+    }
 
     public <T> T get(String url, Class<T> responseType){
         HttpHeaders headers = getHeaders(false);

@@ -1,5 +1,10 @@
 package financialhouse.io.financialhouse.interview.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
+
+@Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MerchantTransactionInfo {
     String referenceNo;
     Integer merchantId;

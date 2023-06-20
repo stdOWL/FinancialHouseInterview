@@ -11,11 +11,12 @@ import java.util.List;
 
 public interface RPDPaymentAPIService {
     LoginResponse merchantLogin(String email, String password) throws AuthenticationFailedException;
-    CustomerInfo clientInfo(String transactionId) throws CustomerInfoNotFoundException;
+    GetClientInfoResponseDTO clientInfo(GetClientInfoRequestDTO request, String authenticationToken) throws CustomerInfoNotFoundException;
 
-    List<TransactionsReportDTO> reportTransactions(ReportTransactionsRequestDTO requestDTO);
+    List<TransactionsReportDTO> reportTransactions(ReportTransactionsRequestDTO requestDTO, String authenticationToken);
 
-    ListTransactionsResponseDTO listTransactions(ListTransactionsRequestDTO requestDTO);
+    ListTransactionsResponseDTO listTransactions(ListTransactionsRequestDTO requestDTO, String authenticationToken);
 
-    GetTransactionResponseDTO transactionInfo(GetTransactionRequestDTO requestDTO);
+    GetTransactionResponseDTO transactionInfo(GetTransactionRequestDTO requestDTO, String authenticationToken);
+
 }

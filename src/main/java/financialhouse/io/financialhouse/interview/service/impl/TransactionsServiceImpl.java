@@ -16,17 +16,17 @@ public class TransactionsServiceImpl implements TransactionsService {
 
 
     @Override
-    public List<TransactionsReportDTO> reportTransactions(ReportTransactionsRequestDTO requestDTO) {
-        return rpdPaymentAPIService.reportTransactions(requestDTO);
+    public List<TransactionsReportDTO> reportTransactions(ReportTransactionsRequestDTO requestDTO, String authenticationToken) {
+        return rpdPaymentAPIService.reportTransactions(requestDTO, authenticationToken);
     }
 
     @Override
-    public ListTransactionsResponseDTO listTransactions(ListTransactionsRequestDTO requestDTO) {
-        return rpdPaymentAPIService.listTransactions(requestDTO);
+    public ListTransactionsResponseDTO listTransactions(ListTransactionsRequestDTO requestDTO, String authenticationToken) {
+        return rpdPaymentAPIService.listTransactions(requestDTO, authenticationToken);
     }
 
     @Override
-    public GetTransactionResponseDTO transactionInfo(GetTransactionRequestDTO requestDTO) {
-        return rpdPaymentAPIService.transactionInfo(requestDTO);
+    public GetTransactionResponseDTO transactionInfo(GetTransactionRequestDTO requestDTO, String authenticationToken) {
+        return rpdPaymentAPIService.transactionInfo(requestDTO, authenticationToken);
     }
 }

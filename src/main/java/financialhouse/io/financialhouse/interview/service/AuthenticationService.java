@@ -1,10 +1,12 @@
 package financialhouse.io.financialhouse.interview.service;
 
-import financialhouse.io.financialhouse.interview.exceptions.CustomerInfoNotFoundException;
+import financialhouse.io.financialhouse.interview.domain.dto.GetClientInfoRequestDTO;
+import financialhouse.io.financialhouse.interview.domain.dto.GetClientInfoResponseDTO;
 import financialhouse.io.financialhouse.interview.model.CustomerInfo;
+import financialhouse.io.financialhouse.interview.model.LoginResponse;
 
 public interface AuthenticationService {
-    boolean login(String username, String password);
-    CustomerInfo getClientInfo(String authToken, String transactionId) throws CustomerInfoNotFoundException;
+    LoginResponse login(String username, String password);
+    GetClientInfoResponseDTO getClientInfo(GetClientInfoRequestDTO authToken, String transactionId);
 
 }

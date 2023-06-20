@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface TransactionsService {
 
-    List<TransactionsReportDTO> reportTransactions(ReportTransactionsRequestDTO requestDTO);
+    List<TransactionsReportDTO> reportTransactions(ReportTransactionsRequestDTO requestDTO, String authenticationToken);
 
-    ListTransactionsResponseDTO listTransactions(ListTransactionsRequestDTO requestDTO);
+    ListTransactionsResponseDTO listTransactions(ListTransactionsRequestDTO requestDTO, String authenticationToken);
 
-    GetTransactionResponseDTO transactionInfo(GetTransactionRequestDTO requestDTO);
+    GetTransactionResponseDTO transactionInfo(GetTransactionRequestDTO requestDTO, String authenticationToken);
 }

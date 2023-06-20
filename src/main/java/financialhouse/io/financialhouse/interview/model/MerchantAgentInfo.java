@@ -1,5 +1,8 @@
 package financialhouse.io.financialhouse.interview.model;
 
+import lombok.Data;
+
+@Data
 public class MerchantAgentInfo {
     Integer id;
     String customerIp;
