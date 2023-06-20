@@ -5,6 +5,7 @@ import financialhouse.io.financialhouse.interview.exceptions.AuthenticationFaile
 import financialhouse.io.financialhouse.interview.exceptions.CustomerInfoNotFoundException;
 import financialhouse.io.financialhouse.interview.model.CustomerInfo;
 import financialhouse.io.financialhouse.interview.model.LoginResponse;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

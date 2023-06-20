@@ -9,18 +9,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequiredArgsConstructor
 public class TransactionsController {
     private final TransactionsService transactionsService;
-    private final TransactionsModelMapper transactionsModelMapper;
+    private final TransactionsModelMapper transactionsModelMapper = TransactionsModelMapper.INSTANCE;
 
     @PostMapping(value = "report")
-    public RestResponse<ReportTransactionsResponse> report(@RequestHeader("Authorization") String authenticationToken, ReportTransactionsRequest request){
+    public RestResponse<List<ReportTransactionsResponse>> report(@RequestHeader("Authorization") String authenticationToken, ReportTransactionsRequest request){
         ReportTransactionsRequestDTO requestDTO = transactionsModelMapper.toReportTransactionsRequestDTO(request);
-        ReportTransactionsResponseDTO responseDTO = transactionsService.reportTransactions(requestDTO);
-        ReportTransactionsResponse response = transactionsModelMapper.toReportTransactionsResponse(responseDTO);
-        return RestResponse.<ReportTransactionsResponse>builder()
+        List<TransactionsReportDTO> responseDTO = transactionsService.reportTransactions(requestDTO);
+        List<ReportTransactionsResponse> response = responseDTO.stream().map(e-> transactionsModelMapper.toReportTransactionsResponse(e)).collect(Collectors.toList());
+
+        return RestResponse.<List<ReportTransactionsResponse>>builder()
                 .status(RestResponseStatus.OK)
                 .data(response)
                 .build();

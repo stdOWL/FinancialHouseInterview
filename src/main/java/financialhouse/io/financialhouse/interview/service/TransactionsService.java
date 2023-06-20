@@ -1,8 +1,10 @@
 package financialhouse.io.financialhouse.interview.service;
 
 import financialhouse.io.financialhouse.interview.domain.dto.*;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 public interface TransactionsService {
 
