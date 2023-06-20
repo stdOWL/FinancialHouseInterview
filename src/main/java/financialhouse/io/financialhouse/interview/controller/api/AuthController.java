@@ -1,4 +1,4 @@
-package financialhouse.io.financialhouse.interview.controller;
+package financialhouse.io.financialhouse.interview.controller.api;
 
 import financialhouse.io.financialhouse.interview.domain.dto.GetClientInfoRequestDTO;
 import financialhouse.io.financialhouse.interview.domain.dto.GetClientInfoResponseDTO;

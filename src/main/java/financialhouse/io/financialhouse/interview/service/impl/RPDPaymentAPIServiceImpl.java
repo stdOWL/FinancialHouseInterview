@@ -82,7 +82,7 @@ public class RPDPaymentAPIServiceImpl implements RPDPaymentAPIService {
         GetTransactionResponseDTO transactionInfoResponse = restClient.postWithAuthToken(authenticationToken, transactionsInfoPath, requestDTO, GetTransactionResponseDTO.class);
 
 
-        if( transactionInfoResponse.getStatus().equalsIgnoreCase("DECLINED") )
+        if( transactionInfoResponse.getStatus()  != null && transactionInfoResponse.getStatus().equalsIgnoreCase("DECLINED") )
             throw new TransactionNotFoundException();
 
 

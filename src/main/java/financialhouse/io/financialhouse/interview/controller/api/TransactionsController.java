@@ -1,4 +1,4 @@
-package financialhouse.io.financialhouse.interview.controller;
+package financialhouse.io.financialhouse.interview.controller.api;
 
 import financialhouse.io.financialhouse.interview.domain.dto.*;
 import financialhouse.io.financialhouse.interview.mappers.TransactionsModelMapper;
