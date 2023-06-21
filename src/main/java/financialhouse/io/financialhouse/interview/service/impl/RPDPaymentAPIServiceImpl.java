@@ -44,12 +44,16 @@ public class RPDPaymentAPIServiceImpl implements RPDPaymentAPIService {
                 .password(password)
                 .build();
 
-        LoginResponse response = restClient.post(loginPath, loginRequest, LoginResponse.class);
-        if(response.getStatus().equalsIgnoreCase("APPROVED") == false || response.getToken() == null)
+        try{
+            LoginResponse response = restClient.post(loginPath, loginRequest, LoginResponse.class);
+            if(response.getStatus().equalsIgnoreCase("APPROVED") == false || response.getToken() == null)
+                throw new AuthenticationFailedException();
+
+
+            return response;
+        }catch (Exception ex){
             throw new AuthenticationFailedException();
-
-
-        return response;
+        }
     }
 
     public GetClientInfoResponseDTO clientInfo(GetClientInfoRequestDTO request, String authenticationToken) throws CustomerInfoNotFoundException {

@@ -6,7 +6,7 @@ import financialhouse.io.financialhouse.interview.model.CustomerInfo;
 import financialhouse.io.financialhouse.interview.model.LoginResponse;
 
 public interface AuthenticationService {
-    LoginResponse login(String username, String password);
+    LoginResponse login(String email, String password);
     GetClientInfoResponseDTO getClientInfo(GetClientInfoRequestDTO authToken, String transactionId);
 
 }

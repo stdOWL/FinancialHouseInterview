@@ -23,7 +23,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     @SneakyThrows
-    public LoginResponse login(String username, String password) {
-        return  rpdPaymentAPIService.merchantLogin(username, password);
+    public LoginResponse login(String email, String password) {
+        return  rpdPaymentAPIService.merchantLogin(email, password);
     }
 }
